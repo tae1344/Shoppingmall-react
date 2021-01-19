@@ -30,7 +30,7 @@ function LandingPage() {
                 if (response.data.success) {
                     // 더보기를 눌렀을 때 조건
                     if (body.loadMore) {
-                        setProducts(...Products, ...response.data.productInfo);
+                        setProducts([...Products, ...response.data.productInfo]);
                     } else {
                         setProducts(response.data.productInfo);
                     }
@@ -58,18 +58,16 @@ function LandingPage() {
 
     const renderCards = Products.map((product, index) => {
 
-        return (
-            // 24등분
-            <Col lg={6} md={8} xs={24} key={index}>
-                <Card
-                    cover={<ImageSlider images={product.images} />}>
-                    <Meta
-                        title={product.title}
-                        description={`${product.price}`}
-                    />
-                </Card>
-            </Col>
-        )
+        return <Col lg={6} md={8} xs={24} key={index}>
+            <Card
+                cover={<ImageSlider images={product.images} />}>
+                <Meta
+                    title={product.title}
+                    description={`${product.price}`}
+                />
+            </Card>
+        </Col>
+
     });
 
 
