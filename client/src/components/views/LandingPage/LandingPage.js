@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
 import axios from 'axios';
-import { Icon, Col, Card, Row, } from 'antd';
+import { Icon, Col, Card, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
+import CheckBox from './Sections/CheckBox';
+import { continents } from './Sections/Datas';
 
 function LandingPage() {
 
@@ -13,6 +15,10 @@ function LandingPage() {
     // 가져온 포스트 수가 limit보다 작은 경우(더 가져올 자료가 없다)에
     // 더보기를 안보이게 조건을 건다
     const [PostSize, setPostSize] = useState(0);
+    const [Filters, setFilters] = useState({
+        continents: [],
+        price: []
+    });
 
     useEffect(() => {
 
@@ -70,6 +76,29 @@ function LandingPage() {
 
     });
 
+    const showFilterResults = (filters) => {
+
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: filters
+        }
+
+        getProducts(body);
+        setSkip(0);
+
+    }
+
+    const handleFilters = (filters, category) => {
+        const newFilters = { ...Filters }
+
+        newFilters[category] = filters;
+
+        showFilterResults(newFilters);
+
+
+    }
+
 
 
     return (
@@ -77,6 +106,17 @@ function LandingPage() {
             <div style={{ textAlign: 'center' }}>
                 <h2>Let's Travel Anywhere <Icon type="roket" /></h2>
             </div>
+
+            {/* Filter */}
+
+            {/* CheckBox */}
+            <CheckBox list={continents} handleFilters={filters => handleFilters(filters, "continents")} />
+
+            {/* RadioBox */}
+
+            {/* Search */}
+
+
 
             <Row gutter={[16, 16]}>
                 {renderCards}

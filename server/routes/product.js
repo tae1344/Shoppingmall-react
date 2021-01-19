@@ -47,10 +47,21 @@ router.post('/products', (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
+  //filter 기능
+  let findArgs = {};
+
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      findArgs[key] = req.body.filters[key];
+    }
+  }
+
+  console.log('findArgs', findArgs);
+
   // limit : 몽고db에서 가져올 데이터 수 제한
   // skip: 몽공db에서 몇번째부터 데이터를 가져올지 설정
   // populate => 해당하는 모든 정보를 가져오는 메서드(여기선 writer 값에 해당하는 모든 정보 ex)이름,이메일... )
-  Product.find()
+  Product.find(findArgs) //DB에서 findArgs 에 맞는 정보들만 찾도록 설정
     .populate("writer")
     .skip(skip)
     .limit(limit)
