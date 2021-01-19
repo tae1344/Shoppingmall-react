@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function (SpecificComponent, option, adminRoute = null) {
     function AuthenticationCheck(props) {
 
-        let user = useSelector(state => state.user);
+        let user = useSelector(state => state.user); // 리덕스 스토어에 저장된 값을 가져온다.
         const dispatch = useDispatch();
 
         useEffect(() => {
