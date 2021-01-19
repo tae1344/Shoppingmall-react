@@ -55,7 +55,7 @@ function UploadProductPage(props) {
     const body = {
       // 로그인 된 사람의 ID --> hoc에서 담아준 유저 정보를 가져와 사용(리덕스스토어)
       writer: props.user.userData._id,
-      title: Title,
+      title: TitleProduct,
       description: Description,
       price: Price,
       images: Images,

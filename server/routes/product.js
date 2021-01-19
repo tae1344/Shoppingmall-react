@@ -41,5 +41,17 @@ router.post('/', (req, res) => {
   })
 });
 
+router.post('/products', (req, res) => {
+  // product collection에 들어있는 모든 상품 정보 가져오기
+  // populate => 해당하는 모든 정보를 가져오는 메서드(여기선 writer 값에 해당하는 모든 정보 ex)이름,이메일... )
+  Product.find()
+    .populate("writer")
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, productInfo });
+    })
+
+});
+
 
 module.exports = router;
