@@ -3,10 +3,11 @@ import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
 import axios from 'axios';
 
-function FileUpload() {
+function FileUpload(props) {
 
   const [Images, setImages] = useState([]);
 
+  // 이미지 올리기
   const dropHandler = (files) => {
     let formData = new FormData();
     const config = {
@@ -20,15 +21,18 @@ function FileUpload() {
       .then(response => {
         if (response.data.success) {
           //console.log(response.data);
-
           // ...사용해 원래 있던 이미지 정보들으 다 넣어주고, 새로 추가한다.
-          setImages([...Images, response.data.filePath])
+          setImages([...Images, response.data.filePath]);
+          // 부모 컴포넌트에 state 전달
+          props.refreshFunction([...Images, response.data.filePath]);
+
         } else {
           alert("파일을 저장하는데 실패했습니다.");
         }
       });
   }
 
+  // 이미지 지우기
   const deleteHandler = (image) => {
     // 현재 이미지 인덱스 값
     const currentIndex = Images.indexOf(image);
@@ -38,6 +42,8 @@ function FileUpload() {
     newImages.splice(currentIndex, 1);
 
     setImages(newImages);
+    // 부모 컴포넌트에 state 전달
+    props.refreshFunction(newImages);
   }
 
   return (
