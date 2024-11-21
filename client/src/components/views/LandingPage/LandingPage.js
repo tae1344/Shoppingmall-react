@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { FaCode } from "react-icons/fa";
+import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { Icon, Col, Card, Row } from 'antd';
+import Icon from '@ant-design/icons'
+
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
-import { continents } from './Sections/Datas';
+import {continents} from './Sections/Datas';
+import { Col, Card, Row } from 'antd';
 
 function LandingPage() {
 

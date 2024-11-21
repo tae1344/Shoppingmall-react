@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
-import { Icon } from 'antd';
+import Icon from '@ant-design/icons'
 import axios from 'axios';
 
 function FileUpload(props) {
